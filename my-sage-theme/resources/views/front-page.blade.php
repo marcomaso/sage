@@ -74,56 +74,27 @@
       <h2 class="text-4xl md:text-5xl font-serif font-light mb-16">Iconic Suites</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <!-- Room 1 -->
-        <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-t-xl relative h-80">
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-            <img src="{{ get_theme_file_uri('public/images/room.png') }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md px-4 py-1 text-sm rounded border border-white/20 font-semibold tracking-wide">From $450</div>
-          </div>
-          <div class="bg-[#1A1A1A] p-8 align-top rounded-b-xl border border-t-0 border-white/5 group-hover:border-white/10 transition-colors">
-            <h3 class="text-2xl font-serif mb-2 group-hover:text-amber-500 transition-colors">Ocean View Suite</h3>
-            <p class="text-stone-400 text-sm mb-6 line-clamp-2">Awake to the sound of waves. A spacious sanctuary with panoramic views of the sea.</p>
-            <div class="flex justify-between items-center text-xs text-stone-500 uppercase tracking-widest font-semibold">
-              <span>65 SQM</span>
-              <span>King Bed</span>
+        @if (!empty($rooms))
+          @foreach($rooms as $room)
+            <div class="group cursor-pointer" onclick="window.location.href='{{ $room['link'] }}'">
+              <div class="overflow-hidden rounded-t-xl relative h-80">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                <img src="{{ get_theme_file_uri('public/images/room.png') }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="{{ $room['title'] }}">
+                <div class="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md px-4 py-1 text-sm rounded border border-white/20 font-semibold tracking-wide">From ${{ $room['price_from'] }}</div>
+              </div>
+              <div class="bg-[#1A1A1A] p-8 align-top rounded-b-xl border border-t-0 border-white/5 group-hover:border-white/10 transition-colors">
+                <h3 class="text-2xl font-serif mb-2 group-hover:text-amber-500 transition-colors">{{ $room['title'] }}</h3>
+                <p class="text-stone-400 text-sm mb-6 line-clamp-2">{{ $room['excerpt'] }}</p>
+                <div class="flex justify-between items-center text-xs text-stone-500 uppercase tracking-widest font-semibold">
+                  <span>{{ $room['size_sqm'] }} SQM</span>
+                  <span>{{ $room['bed_type'] }}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Room 2 -->
-        <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-t-xl relative h-80">
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-            <img src="{{ get_theme_file_uri('public/images/room.png') }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md px-4 py-1 text-sm rounded border border-white/20 font-semibold tracking-wide">From $750</div>
-          </div>
-          <div class="bg-[#1A1A1A] p-8 align-top rounded-b-xl border border-t-0 border-white/5 group-hover:border-white/10 transition-colors">
-            <h3 class="text-2xl font-serif mb-2 group-hover:text-amber-500 transition-colors">Premium Pool Villa</h3>
-            <p class="text-stone-400 text-sm mb-6 line-clamp-2">Complete privacy with exclusive access to your own infinity pool nestled in the tropics.</p>
-            <div class="flex justify-between items-center text-xs text-stone-500 uppercase tracking-widest font-semibold">
-              <span>120 SQM</span>
-              <span>Private Pool</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room 3 -->
-        <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-t-xl relative h-80">
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-            <img src="{{ get_theme_file_uri('public/images/room.png') }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md px-4 py-1 text-sm rounded border border-white/20 font-semibold tracking-wide">From $1,200</div>
-          </div>
-          <div class="bg-[#1A1A1A] p-8 align-top rounded-b-xl border border-t-0 border-white/5 group-hover:border-white/10 transition-colors">
-            <h3 class="text-2xl font-serif mb-2 group-hover:text-amber-500 transition-colors">The Presidential</h3>
-            <p class="text-stone-400 text-sm mb-6 line-clamp-2">The pinnacle of luxury living. Unmatched elegance, expansive space, and dedicated butler service.</p>
-            <div class="flex justify-between items-center text-xs text-stone-500 uppercase tracking-widest font-semibold">
-              <span>250 SQM</span>
-              <span>2 Bedrooms</span>
-            </div>
-          </div>
-        </div>
+          @endforeach
+        @else
+          <p class="text-center text-stone-500 italic col-span-3">No suites available at the moment.</p>
+        @endif
       </div>
     </div>
   </section>
