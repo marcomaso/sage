@@ -1,0 +1,8 @@
+{
+    "core": null,
+    "themes": [
+        "./my-sage-theme"
+    ],
+    "port": 9090,
+    "testsPort": 9091
+}
