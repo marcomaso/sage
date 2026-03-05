@@ -11,7 +11,7 @@ class FrontPage extends Composer
      *
      * @var string[]
      */
-    protected $views = [
+    protected static $views = [
         'front-page',
     ];
 
